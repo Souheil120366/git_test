@@ -1,3 +1,12 @@
+const container = document.querySelector('#container');
+const buttons = document.querySelectorAll('button');
+const content1 = document.createElement('div');
+const h1 = document.createElement('h1')
+const h2 = document.createElement('h1')
+container.appendChild(content1);
+content1.appendChild(h1)
+content1.appendChild(h2)
+
 function computerPlay() {
 
     x=Math.floor(Math.random()*3)
@@ -64,6 +73,26 @@ function playRound(playerSelection, computerSelection) {
       else {console.log('YOU LOSE')}
   }
 
+  computer_score=0
+  user_score=0
+  
+
+  buttons.forEach((button) => {
+
+    // and for each one we add a 'click' listener
+    button.addEventListener('click', () => {
+      let result = playRound(button.id,computerPlay());
+      if (result[1] == 'computer win') { computer_score +=1};
+      if (result[1] == 'user win') { user_score +=1}; 
+      h1.innerHTML = 'computer score '+ computer_score ;
+      h2.innerHTML = ' user score ' + user_score;
+      if (computer_score==5) {h1.innerHTML = 'COMPUTER WIN'; computer_score=0; user_score=0;}
+      if (user_score==5) {h1.innerHTML = 'YOU WIN'; computer_score=0; user_score=0;}
+      //alert(result[0])
+      
+    });
+  });
+
 //console.log(game())
-game()
+//game()
   
